@@ -1,0 +1,89 @@
+version: "3.1"
+
+nlu:
+- intent: desativar_monitoramento_sites
+  examples: |
+    - desativar monitoramento de sites
+    - Desativar monitoramento de sites
+    - desabilitar monitoramento
+    - Desabilitar monitoramento de sites
+    - Desabilitar monitoramento de páginas
+    - interromper monitoramento de sites
+    - Interromper monitoramento de páginas
+    - Parar com o monitoramento
+    - Terminar monitoramento de sites
+    - Finalizar monitoramento de sites
+
+- intent: ativar_monitoramento_sites
+  examples: |
+    - ativar monitoramento de sites
+    - ativar monitoramento de sites
+    - habilitar monitoramento
+    - Habilitar monitoramento de sites
+    - Habilitar monitoramento de páginas
+    - Iniciar monitoramento de sites
+    - Iniciar monitoramento de páginas
+    - começar com o monitoramento
+    - Startar monitoramento de sites
+    - voltar monitoramento de sites
+
+- intent: mood_so
+  examples: |
+    - mais ou menos
+    - não sei
+    - sei lá
+
+- intent: greet
+  examples: |
+    - Olá 
+    - hey
+    - hello
+    - hi
+    - Oi
+    - Oiii
+    - Alô
+    - Bom dia
+    - bom dia
+    - boa tarde
+    - boa noite
+    - fala aí
+    - como vai?
+
+- intent: goodbye
+  examples: |
+    - tchau
+    - bye bye
+    - até mais
+    - falou
+    - inté
+    - até breve
+    - valeu
+
+- intent: affirm
+  examples: |
+    - yes
+    - y
+    - sim
+    - claro
+    - óbvio
+    - com certeza
+
+- intent: deny
+  examples: |
+    - no
+    - n
+    - nunca
+    - não
+    - acho que não
+    - sem chance
+
+- intent: bot_challenge
+  examples: |
+    - are you a bot?
+    - are you a human?
+    - am I talking to a bot?
+    - am I talking to a human?
+    - você é um robô?
+    - você é humano?
+    - estou falando com um robô?
+    - estou falando com um humano?

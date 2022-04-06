@@ -1,0 +1,34 @@
+version: "3.1"
+
+intents:
+  - greet
+  - goodbye
+  - affirm
+  - deny
+  - bot_challenge
+  - desativar_monitoramento_sites
+  - ativar_monitoramento_sites
+
+actions:
+  - action_desativar_monitoramento_sites
+  - action_ativar_monitoramento_sites
+
+responses:
+  utter_greet:
+  - text: "Opa! Fala aí."
+  - text: "Alô! Fala meu brother."
+  - text: "Olá! Como posso ajudar?"
+  - text: "Oi. Diga o que você quer."
+
+  utter_goodbye:
+  - text: "Bye"
+  - text: "Tchau"
+  - text: "Até mais"
+
+  utter_iamabot:
+  - text: "Eu sou um robô."
+  - text: "Eu sou um bot."
+
+session_config:
+  session_expiration_time: 60
+  carry_over_slots_to_new_session: true
