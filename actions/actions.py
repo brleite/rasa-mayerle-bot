@@ -50,7 +50,7 @@ class ActionDesativarMonitoramento(Action):
 
         return []
 
-class ActioniAtivarMonitoramento(Action):
+class ActionAtivarMonitoramento(Action):
 
     def name(self) -> Text:
         return "action_ativar_monitoramento_sites"
