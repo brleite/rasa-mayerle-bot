@@ -1,5 +1,6 @@
 #!/bin/bash 
 
+export RASA_ACTIONS_PORT=5055
 
 function escapeString {
   PARAM=$1

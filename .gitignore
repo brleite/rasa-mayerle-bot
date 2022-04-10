@@ -41,3 +41,4 @@ credentials.yml
 credentials.yml.bkp
 scripts/config.properties
 scripts/nohup.out
+nohup.out
