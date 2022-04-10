@@ -94,10 +94,22 @@ class ActionFalarOlivia(Action):
     def run(self, dispatcher: CollectingDispatcher,
             tracker: Tracker,
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
-        
-        criar_audio(mensagem="Oi pessoal!")
 
-        dispatcher.utter_message(text="Mensagem enviada.")
+        username = tracker.sender_id
+
+        if (username == "161484917"):
+                 
+          message = tracker.latest_message.get('text')
+        
+          criar_audio(mensagem=message)
+
+          retorno = "Mensagem enviada."
+          
+          dispatcher.utter_message(text=retorno)
+        else:
+          retorno = "Desculpe-me! Você não está autorizado a essa funcionalidade."
+
+          dispatcher.utter_message(text=retorno)
     
 
 

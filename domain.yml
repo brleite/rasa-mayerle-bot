@@ -8,12 +8,12 @@ intents:
   - bot_challenge
   - desativar_monitoramento_sites
   - ativar_monitoramento_sites
-#  - falar_olivia
+  - falar_olivia
 
 actions:
   - action_desativar_monitoramento_sites
   - action_ativar_monitoramento_sites
-#  - action_falar_olivia
+  - action_falar_olivia
 
 responses:
   utter_greet:
