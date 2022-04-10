@@ -12,6 +12,22 @@ from typing import Any, Text, Dict, List
 from rasa_sdk import Action, Tracker
 from rasa_sdk.executor import CollectingDispatcher
 
+from gtts import gTTS
+import sys
+from subprocess import call
+from pydub import AudioSegment
+
+def criar_audio(mensagem):
+    saida = '/tmp/audios/mensagem.mp3'
+
+    tts = gTTS(mensagem, lang='pt-br')
+    tts.save(saida)
+
+    sound = AudioSegment.from_mp3("/tmp/audios/mensagem.mp3")
+    sound.export("/tmp/audios/mensagem.wav", format="wav")
+
+    # print('OLIVIA: ', mensagem)
+    call(['aplay', '-D', 'plughw:1,0', '/tmp/audios/mensagem.wav'])     # LINUX
 
 class ActionDesativarMonitoramento(Action):
 
@@ -69,3 +85,20 @@ class ActionAtivarMonitoramento(Action):
         dispatcher.utter_message(text="Monitoramento de sites habilitado!")
 
         return []
+
+class ActionFalarOlivia(Action):
+    def name(self) -> Text:
+        return "action_falar_olivia"
+
+
+    def run(self, dispatcher: CollectingDispatcher,
+            tracker: Tracker,
+            domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+        
+        criar_audio(mensagem="Oi pessoal!")
+
+        dispatcher.utter_message(text="Mensagem enviada.")
+    
+
+
+

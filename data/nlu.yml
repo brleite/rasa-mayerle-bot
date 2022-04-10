@@ -27,6 +27,15 @@ nlu:
     - Startar monitoramento de sites
     - voltar monitoramento de sites
 
+- intent: falar_olivia
+  examples: |
+    - Olívia, mandar mensagem para casa
+    - Olivia, enviar mensagem
+    - Por favor envie uma mensagem, Olívia
+    - Por favor, mande uma mensagem para casa Olivia
+    - Olivia, por favor falar
+    - Olivia, falar em casa
+
 - intent: mood_so
   examples: |
     - mais ou menos

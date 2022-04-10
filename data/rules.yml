@@ -21,3 +21,8 @@ rules:
   steps:
   - intent: ativar_monitoramento_sites
   - action: action_ativar_monitoramento_sites
+
+#- rule: Falar Olivia
+#  steps:
+#  - intent: falar_olivia
+#  - action: action_falar_olivia
