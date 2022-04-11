@@ -144,6 +144,6 @@ stories:
     - requested_slot: null
   - active_loop: null
   - action: utter_submit
-  - action: utter_slots_values
+  #- action: utter_slots_values
   - action: action_falar_olivia
   - action: action_reset_slots_assistente

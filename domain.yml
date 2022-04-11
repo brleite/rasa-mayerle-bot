@@ -106,7 +106,7 @@ responses:
   - text: "Obrigado. Eu vou me lembrar."
 
   utter_submit:
-  - text: Ok. Obrigado!
+  - text: Ok!
 
   utter_slots_values:
   - text: "Frase repassada para a action: {frase_assistente}"
