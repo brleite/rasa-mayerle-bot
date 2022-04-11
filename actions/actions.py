@@ -102,7 +102,8 @@ class ActionFalarOlivia(Action):
 
         if (username == "161484917" or username == "1307765181" or username == "1001307765181"):
                  
-          message = tracker.latest_message.get('text')
+          #  message = tracker.latest_message.get('text')
+          message = tracker.get_slot("frase_assistente")
         
           criar_audio(mensagem=message)
 
