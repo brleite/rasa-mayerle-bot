@@ -10,15 +10,19 @@
 import datetime as dt
 from typing import Any, Text, Dict, List
 
-from rasa_sdk import Action, Tracker
+from rasa_sdk import Action, Tracker, FormValidationAction
 from rasa_sdk.executor import CollectingDispatcher
 from rasa_sdk.events import SlotSet
 from rasa_sdk.events import AllSlotsReset
+from rasa_sdk.types import DomainDict
 
 from gtts import gTTS
 import sys
 from subprocess import call
 from pydub import AudioSegment
+
+def clean_value(value):
+    return "".join([c for c in value if c.isalpha()])
 
 def criar_audio(mensagem):
     saida = '/tmp/audios/mensagem.mp3'
@@ -168,3 +172,23 @@ class ActionReseSlotsAssistente(Action):
     def run(self, dispatcher, tracker, domain):
         # return [AllSlotsReset()]
         return [SlotSet("frase_assistente", None)]
+
+class ValidateFraseAssistenteForm(FormValidationAction):
+    def name(self) -> Text:
+        return "validate_frase_assistente_form"
+
+    def validate_frase_assistente(
+        self,
+        slot_value: Any,
+        dispatcher: CollectingDispatcher,
+        tracker: Tracker,
+        domain: DomainDict,
+    ) -> Dict[Text, Any]:
+        """Validate `frase_assistente` value."""
+
+        # If the name is super short, it might be wrong.
+        value = clean_value(slot_value)
+        if len(value) == 0:
+            dispatcher.utter_message(text="Talvez você tenha digitado errado")
+            return {"frase_assistente": None}
+        return {"frase_assistente": slot_value}

@@ -125,6 +125,7 @@ actions:
   - utter_submit
   - utter_slot_values
   - action_reset_slots_assistente
+  - validate_frase_assistente_form
 
 session_config:
   session_expiration_time: 60
