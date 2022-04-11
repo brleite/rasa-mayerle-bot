@@ -1,41 +1,6 @@
 version: "3.1"
 
 nlu:
-- intent: desativar_monitoramento_sites
-  examples: |
-    - desativar monitoramento de sites
-    - Desativar monitoramento de sites
-    - desabilitar monitoramento
-    - Desabilitar monitoramento de sites
-    - Desabilitar monitoramento de páginas
-    - interromper monitoramento de sites
-    - Interromper monitoramento de páginas
-    - Parar com o monitoramento
-    - Terminar monitoramento de sites
-    - Finalizar monitoramento de sites
-
-- intent: ativar_monitoramento_sites
-  examples: |
-    - ativar monitoramento de sites
-    - ativar monitoramento de sites
-    - habilitar monitoramento
-    - Habilitar monitoramento de sites
-    - Habilitar monitoramento de páginas
-    - Iniciar monitoramento de sites
-    - Iniciar monitoramento de páginas
-    - começar com o monitoramento
-    - Startar monitoramento de sites
-    - voltar monitoramento de sites
-
-- intent: falar_olivia
-  examples: |
-    - Olívia, mandar mensagem para casa
-    - Olivia, enviar mensagem
-    - Por favor envie uma mensagem, Olívia
-    - Por favor, mande uma mensagem para casa Olivia
-    - Olivia, por favor falar
-    - Olivia, falar em casa
-
 - intent: mood_so
   examples: |
     - mais ou menos
@@ -96,3 +61,149 @@ nlu:
     - você é humano?
     - estou falando com um robô?
     - estou falando com um humano?
+
+- intent: mood_great
+  examples: |
+    - perfeito
+    - ótimo
+    - maravilhoso
+    - sentindo como um rei
+    - estou me sentindo muito bem
+    - Eu estou bem
+    - Eu estou ótimo
+    - extremamente bem
+    - muito bem
+    - bem
+
+- intent: mood_unhappy
+  examples: |
+    - meu dia foi terrível
+    - Eu estou triste
+    - Eu não estou me sentindo bem
+    - Eu estou desapontado
+    - Muito triste
+    - triste
+    - infeliz
+    - nada bem
+    - não muito bem
+    - extremamente triste
+
+- intent: desativar_monitoramento_sites
+  examples: |
+    - desativar monitoramento de sites
+    - Desativar monitoramento de sites
+    - desabilitar monitoramento
+    - Desabilitar monitoramento de sites
+    - Desabilitar monitoramento de páginas
+    - interromper monitoramento de sites
+    - Interromper monitoramento de páginas
+    - Parar com o monitoramento
+    - Terminar monitoramento de sites
+    - Finalizar monitoramento de sites
+
+- intent: ativar_monitoramento_sites
+  examples: |
+    - ativar monitoramento de sites
+    - ativar monitoramento de sites
+    - habilitar monitoramento
+    - Habilitar monitoramento de sites
+    - Habilitar monitoramento de páginas
+    - Iniciar monitoramento de sites
+    - Iniciar monitoramento de páginas
+    - começar com o monitoramento
+    - Startar monitoramento de sites
+    - voltar monitoramento de sites
+
+- intent: falar_olivia
+  examples: |
+    - Gostaria de pedir para a Olívia mandar uma mensagem 
+    - Enviar mensagem para olívia
+    - pedir para a Olívia mandar mensagem
+    - Olívia, mandar mensagem
+    - Olivia, enviar mensagem
+    - Olivia, mensagem
+    - Mensagem, Olívia
+    - Enviar Olívia
+
+- intent: informar
+  examples: |
+    - [Bom dia](frase_assistente)
+    - A frase nome é: [Oi pessoal](frase_assistente)
+    - Diga a frase [Olá como vai](frase_assistente)
+    - Frase: [Fala aí galera](frase_assistente)
+
+- intent: informar_horario
+  examples: |
+    - Poderia me informar que horas são
+    - Me diga o horário
+    - Que horas são
+    - diga-me as horas
+
+- intent: agradecimento
+  examples: |
+    - obrigado
+    - muito obrigado
+    - grato
+    - muito grato
+    - agradecido
+    - valeu
+
+- intent: pergunte_me_algo
+  examples: |
+    - pergunte-me algo
+    - você gostaria de me perguntar alguma coisa
+    - fique à vontade para me perguntar algo
+    - Gostaria de me fazer uma pergunta?
+
+- intent: informar_nome 
+  examples: |
+    - Meu nome é [Bruno](nome)
+    - [Bruno](nome)
+    - me chamo [Bruno](nome)
+    - [Diana](nome)
+    - [Júlia](nome)
+    - [Vera](nome)
+    - [Luis Carlos](nome)
+    - [Luis](nome)
+    - [Adriane](nome)
+    - [Bruno da Silva](nome)
+    - [Diana da Silva](nome)
+
+- intent: repetir_nome
+  examples: |
+    - Qual é o meu nome
+    - Diga o meu nome
+    - Você sabe o meu nome
+    - Repita o meu nome
+    - Repetir meu nome
+    - Repita o nome
+    - Qual o nome
+
+- intent: conversar_time
+  examples: |
+    - podemos conversar sobre futebol
+    - gostaria de saber qual o meu time?
+    - quer conversar sobre futebol?
+    - poderia me perguntar sobre times de futebol?
+
+- intent: informar_time
+  examples: |
+    - Meu time é [Flamengo](time)
+    - [Flamengo](time)
+    - [Vasco](time)
+    - [Fluminense](time)
+    - [Botafogo](time)
+    - Torço para o [flamengo](time)
+    - O maior do Rio [flamengo](time)
+
+- intent: repetir_time
+  examples: |
+    - Qual é o meu time
+    - Diga o meu time
+    - Você sabe o meu time
+    - Repita o meu time
+    - Repetir time
+    - Repita o time
+    - Repetir meu time
+    - Qual o time
+

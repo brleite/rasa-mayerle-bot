@@ -7,10 +7,13 @@
 
 # This is a simple example for a custom action which utters "Hello World!"
 
+import datetime as dt
 from typing import Any, Text, Dict, List
 
 from rasa_sdk import Action, Tracker
 from rasa_sdk.executor import CollectingDispatcher
+from rasa_sdk.events import SlotSet
+from rasa_sdk.events import AllSlotsReset
 
 from gtts import gTTS
 import sys
@@ -97,7 +100,7 @@ class ActionFalarOlivia(Action):
 
         username = tracker.sender_id
 
-        if (username == "161484917"):
+        if (username == "161484917" or username == "1307765181" or username == "1001307765181"):
                  
           message = tracker.latest_message.get('text')
         
@@ -111,6 +114,56 @@ class ActionFalarOlivia(Action):
 
           dispatcher.utter_message(text=retorno)
     
+class ActionInformarHorario(Action):
 
+    def name(self) -> Text:
+        return "action_informar_horario"
 
+    def run(self, dispatcher: CollectingDispatcher,
+            tracker: Tracker,
+            domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
 
+        dispatcher.utter_message(text=f"{dt.datetime.now()}")
+
+        return []
+
+class ActionInformarNome(Action):
+
+    def name(self) -> Text:
+        return "action_informar_nome"
+
+    def run(self, dispatcher: CollectingDispatcher,
+            tracker: Tracker,
+            domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+
+        nome = tracker.get_slot("nome")
+        if not nome:
+            dispatcher.utter_message(text="Eu não sei o seu nome.")
+        else:
+            dispatcher.utter_message(text=f"O seu nome é {nome}!")
+        return []
+
+class ActionInformarTime(Action):
+
+    def name(self) -> Text:
+        return "action_informar_time"
+
+    def run(self, dispatcher: CollectingDispatcher,
+            tracker: Tracker,
+            domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+
+        time = tracker.get_slot("time")
+        if not time:
+            dispatcher.utter_message(text="Eu não sei o seu time.")
+        else:
+            dispatcher.utter_message(text=f"O seu time é {time}!")
+        return []
+
+class ActionReseSlotsAssistente(Action):
+
+    def name(self):
+        return "action_reset_slots_assistente"
+
+    def run(self, dispatcher, tracker, domain):
+        # return [AllSlotsReset()]
+        return [SlotSet("frase_assistente", None)]

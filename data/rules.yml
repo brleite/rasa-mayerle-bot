@@ -22,7 +22,52 @@ rules:
   - intent: ativar_monitoramento_sites
   - action: action_ativar_monitoramento_sites
 
-- rule: Falar Olivia
+- rule: Informar horário
+  steps:
+  - intent: informar_horario
+  - action: action_informar_horario
+
+#- rule: Falar Olivia
+#  steps:
+#  - intent: falar_olivia
+#  - action: action_falar_olivia
+
+- rule: Agradecimento 
+  steps:
+  - intent: agradecimento
+  - action: utter_por_nada
+
+- rule: Ativar form time
+  steps:
+  - intent: conversar_time
+  - action: time_form
+  - active_loop: time_form
+
+- rule: Submit form time
+  condition:
+  - active_loop: time_form
+  steps:
+  - action: time_form
+  - active_loop: null
+  - slot_was_set:
+    - requested_slot: null
+  - action: utter_remember
+
+- rule: Ativar form frase_assistente
   steps:
   - intent: falar_olivia
+  - action: frase_assistente_form
+  - active_loop: frase_assistente_form
+
+- rule: Submit form frase_assistente
+  condition:
+  - active_loop: frase_assistente_form
+  steps:
+  - action: frase_assistente_form
+  - active_loop: null
+  - slot_was_set:
+    - requested_slot: null
+  - action: utter_submit
+  - action: utter_slots_values
   - action: action_falar_olivia
+  - action: action_reset_slots_assistente

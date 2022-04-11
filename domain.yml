@@ -6,14 +6,59 @@ intents:
   - affirm
   - deny
   - bot_challenge
+  - mood_so
+  - mood_unhappy
+  - mood_great
   - desativar_monitoramento_sites
   - ativar_monitoramento_sites
   - falar_olivia
+  - informar_horario
+  - informar
+  - agradecimento
+  - informar_nome
+  - pergunte_me_algo
+  - repetir_nome
+  - informar_time
+  - conversar_time
+  - repetir_time
 
-actions:
-  - action_desativar_monitoramento_sites
-  - action_ativar_monitoramento_sites
-  - action_falar_olivia
+entities:
+  - frase_assistente
+  - nome
+  - time
+
+slots:
+  frase_assistente:
+    type: text
+    initial_value: null
+    influence_conversation: false 
+    mappings:
+    - type: from_text
+      conditions:
+      - active_loop: frase_assistente_form
+        requested_slot: frase_assistente
+  nome:
+    type: text
+    influence_conversation: true
+    mappings:
+    - type: from_entity
+      entity: nome
+  time:
+    type: text
+    influence_conversation: true
+    mappings:
+    - type: from_entity
+      entity: time
+      conditions:
+      - active_loop: time_form
+
+forms:
+  frase_assistente_form:
+    required_slots:
+    - frase_assistente
+  time_form:
+    required_slots:
+    -  time
 
 responses:
   utter_greet:
@@ -21,6 +66,16 @@ responses:
   - text: "Alô! Fala meu brother."
   - text: "Olá! Como posso ajudar?"
   - text: "Oi. Diga o que você quer."
+
+  utter_cheer_up:
+  - image: https://i.imgur.com/nGF1K8f.jpg
+    text: 'Aqui está algo para te animar:'
+
+  utter_did_that_help:
+  - text: "Ajudou?"
+
+  utter_happy:
+  - text: "Ótimo, vamos em frente!"
 
   utter_goodbye:
   - text: "Bye"
@@ -30,6 +85,46 @@ responses:
   utter_iamabot:
   - text: "Eu sou um robô."
   - text: "Eu sou um bot."
+
+  utter_por_nada:
+  - text: "Por nada!"
+  - text: "De nada."
+  - text: "Foi um prazer te atender."
+  - text: "Falou."
+
+  utter_ask_frase_assistente:
+  - text: "Qual frase você gostaria que a Olívia dissesse?"
+
+  utter_ask_nome:
+  - text: "Qual é o seu nome?"
+
+  utter_ask_time:
+  - text: "Qual é o seu time?"
+  - text: "Você torce para qual time?"
+
+  utter_remember:
+  - text: "Obrigado. Eu vou me lembrar."
+
+  utter_submit:
+  - text: Ok. Obrigado!
+
+  utter_slots_values:
+  - text: "Frase repassada para a action: {frase_assistente}"
+
+
+actions:
+  - action_desativar_monitoramento_sites
+  - action_ativar_monitoramento_sites
+  - action_informar_horario
+  - action_falar_olivia
+  - utter_ask_nome
+  - utter_remember
+  - action_informar_nome
+  - utter_ask_time
+  - action_informar_time
+  - utter_submit
+  - utter_slot_values
+  - action_reset_slots_assistente
 
 session_config:
   session_expiration_time: 60

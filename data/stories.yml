@@ -26,3 +26,124 @@ stories:
     #- action: utter_did_that_help
     #- intent: deny
     #- action: utter_goodbye
+
+- story: Informar nome story 1
+  steps:
+  - intent: pergunte_me_algo
+  - action: utter_ask_nome
+  - intent: informar_nome
+    entities:
+    - nome: Bruno 
+  - slot_was_set:
+    - nome: Bruno
+  - action: utter_remember
+  - intent: repetir_nome 
+  - action: action_informar_nome
+  - intent: goodbye
+  - action: utter_goodbye
+
+- story: Informar nome story 2
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - intent: repetir_nome
+  - action: action_informar_nome
+  - intent: pergunte_me_algo
+  - action: utter_ask_nome
+  - intent: informar_nome
+    entities:
+    - nome: Diana
+  - slot_was_set:
+    - nome: Diana
+  - action: utter_remember
+  - intent: repetir_nome
+  - action: action_informar_nome
+  - intent: goodbye
+  - action: utter_goodbye
+
+- story: Conversa time story 1
+  steps:
+  - intent: conversar_time
+  - action: time_form
+  - active_loop: time_form
+  - slot_was_set:
+    - requested_slot: time
+  - slot_was_set:
+    - time: Flamengo
+  - slot_was_set:
+    - requested_slot: null
+  - active_loop: null
+  - action: utter_remember
+  - intent: repetir_time
+#  - action: utter_happy
+  - action: action_informar_time
+  - intent: mood_unhappy
+  - action: utter_cheer_up
+  - action: utter_did_that_help
+  - intent: mood_unhappy
+  - action: utter_happy
+  - intent: goodbye
+  - action: utter_goodbye
+
+- story: Conversa time story 2
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - intent: mood_unhappy
+  - action: utter_cheer_up
+  - action: utter_did_that_help
+  - intent: affirm
+  - action: utter_happy
+  - intent: repetir_time
+  - action: action_informar_time
+  - intent: conversar_time
+  - action: time_form
+  - active_loop: time_form
+  - slot_was_set:
+    - requested_slot: time
+  - slot_was_set:
+    - time: Flamengo
+  - slot_was_set:
+    - requested_slot: null
+  - active_loop: null
+  - action: utter_remember
+  - intent: repetir_time
+  - action: action_informar_time
+  - intent: mood_unhappy
+  - action: utter_cheer_up
+  - action: utter_did_that_help
+  - intent: affirm
+  - action: utter_happy
+
+#- story: Conversa time story 3
+#  steps:
+#  - intent: greet
+#  - action: utter_greet
+#  - intent: mood_unhappy
+#    entities:
+#    - shirt_size: medium
+#  - action: utter_cheer_up
+#  - action: utter_did_that_help
+#  - intent: affirm
+#  - action: utter_happy
+#  - intent: repeat_shirt_size
+#  - action: action_say_shirt_size
+
+- story: Conversa frase_assistente story 1
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - intent: falar_olivia
+  - action: frase_assistente_form
+  - active_loop: frase_assistente_form
+  - slot_was_set:
+    - requested_slot: frase_assistente
+  - slot_was_set:
+    - frase_assistente: "Bom dia" 
+  - slot_was_set:
+    - requested_slot: null
+  - active_loop: null
+  - action: utter_submit
+  - action: utter_slots_values
+  - action: action_falar_olivia
+  - action: action_reset_slots_assistente
