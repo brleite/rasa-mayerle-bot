@@ -57,7 +57,7 @@ class ActionDesativarMonitoramento(Action):
         #if telegram_chat_type == 'group':
         #    is_group = True
 
-        monitor_sites_change_properties_file="/home/brleite/projetos/monitor-site-change/scripts/config.properties"
+        monitor_sites_change_properties_file="/home/brleite/projetos/monitor-site-changes/scripts/config.properties"
         property_enabled_false="enabled=false\n"
 
         f = open(monitor_sites_change_properties_file, "w")
@@ -82,7 +82,7 @@ class ActionAtivarMonitoramento(Action):
             tracker: Tracker,
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
 
-        monitor_sites_change_properties_file="/home/brleite/projetos/monitor-site-change/scripts/config.properties"
+        monitor_sites_change_properties_file="/home/brleite/projetos/monitor-site-changes/scripts/config.properties"
         property_enabled_false="enabled=true\n"
 
         f = open(monitor_sites_change_properties_file, "w")
