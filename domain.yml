@@ -126,7 +126,7 @@ responses:
   - text: "Frase repassada para a action: {frase_assistente}"
 
   utter_ask_duracao:
-  - text: "Qual seria a duração da gravação? (valor máximo: 60 segundos)"
+  - text: "Qual seria a duração da gravação?"
 
 actions:
   - action_desativar_monitoramento_sites

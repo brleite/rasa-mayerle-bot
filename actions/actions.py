@@ -213,14 +213,17 @@ class ValidateGravarAudioMicrofoneForm(FormValidationAction):
 
         try:
             duracao = int(slot_value)
+            max_duracao = 20
+            print(duracao)
+            print(max_duracao)
             
-            if duracao > 60:
-                dispatcher.utter_message(text="Você informou um valor superior a 60.")
+            if (duracao > max_duracao):
+                dispatcher.utter_message(text="Você informou um valor superior a " + max_duracao + ".")
                 return {"duracao": None}
                 
             return {"duracao": slot_value}
         except:
-            dispatcher.utter_message(text="Você informou um valor inválido. Digite somente números.")
+            dispatcher.utter_message(text="Você informou um valor inválido. Digite um número menor ou igual a " + str(max_duracao) + ".")
             return {"duracao": None}            
 
 class ActionGravarAudio(Action):
@@ -244,8 +247,9 @@ class ActionGravarAudio(Action):
                  
             duracaoStr = tracker.get_slot("duracao")
             duracao = int(duracaoStr)
+            max_duracao = 20
 
-            if (duracao <= 60):
+            if (duracao <= max_duracao):
                 gravar_audio_microfone(duracao=duracao, arquivo_saida='/tmp/audios/audio_mic.mp3')
                 
                 dispatcher.utter_message(text='Áudio gravado com sucesso.')
