@@ -207,3 +207,13 @@ nlu:
     - Repetir meu time
     - Qual o time
 
+- intent: gravar_audio_microfone
+  examples: |
+    - Gravar audio do microfone
+    - Gravar áudio
+    - gravar microfone
+    - Gravar som ambiente
+    - Gravar som
+    - Gravar mic
+    - Capturar som ambiente
+    - Capturar audio

@@ -21,11 +21,13 @@ intents:
   - informar_time
   - conversar_time
   - repetir_time
+  - gravar_audio_microfone
 
 entities:
   - frase_assistente
   - nome
   - time
+  - duracao
 
 slots:
   frase_assistente:
@@ -51,6 +53,15 @@ slots:
       entity: time
       conditions:
       - active_loop: time_form
+  duracao:
+    type: text
+    initial_value: null
+    influence_conversation: true
+    mappings:
+    - type: from_text
+      conditions:
+      - active_loop: gravar_audio_microfone_form
+        requested_slot: duracao
 
 forms:
   frase_assistente_form:
@@ -59,6 +70,9 @@ forms:
   time_form:
     required_slots:
     -  time
+  gravar_audio_microfone_form:
+    required_slots:
+    - duracao
 
 responses:
   utter_greet:
@@ -111,6 +125,8 @@ responses:
   utter_slots_values:
   - text: "Frase repassada para a action: {frase_assistente}"
 
+  utter_ask_duracao:
+  - text: "Qual seria a duração da gravação? (valor máximo: 60 segundos)"
 
 actions:
   - action_desativar_monitoramento_sites
@@ -126,6 +142,9 @@ actions:
   - utter_slot_values
   - action_reset_slots_assistente
   - validate_frase_assistente_form
+  - action_gravar_audio_microfone
+  - validate_gravar_audio_microfone_form
+  - action_reset_slots_gravar_audio_microfone
 
 session_config:
   session_expiration_time: 60

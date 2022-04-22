@@ -71,3 +71,22 @@ rules:
   #- action: utter_slots_values
   - action: action_falar_olivia
   - action: action_reset_slots_assistente
+
+- rule: Ativar form gravar_audio_microfone
+  steps:
+  - intent: gravar_audio_microfone
+  - action: gravar_audio_microfone_form
+  - active_loop: gravar_audio_microfone_form
+
+- rule: Submit form gravar_audio_microfone
+  condition:
+  - active_loop: gravar_audio_microfone_form
+  steps:
+  - action: gravar_audio_microfone_form
+  - active_loop: null
+  - slot_was_set:
+    - requested_slot: null
+  - action: utter_submit
+  #- action: utter_slots_values
+  - action: action_gravar_audio_microfone
+  - action: action_reset_slots_gravar_audio_microfone

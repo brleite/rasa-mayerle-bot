@@ -147,3 +147,22 @@ stories:
   #- action: utter_slots_values
   - action: action_falar_olivia
   - action: action_reset_slots_assistente
+
+- story: Conversa gravar_audio_microfone story 1
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - intent: gravar_audio_microfone
+  - action: gravar_audio_microfone_form
+  - active_loop: gravar_audio_microfone_form
+  - slot_was_set:
+    - requested_slot: duracao
+  - slot_was_set:
+    - frase_assistente: "10" 
+  - slot_was_set:
+    - requested_slot: null
+  - active_loop: null
+  - action: utter_submit
+  #- action: utter_slots_values
+  - action: action_gravar_audio_microfone
+  - action: action_reset_slots_gravar_audio_microfone
