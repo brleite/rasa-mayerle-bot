@@ -39,7 +39,7 @@ def criar_audio(mensagem):
     call(['aplay', '-D', 'plughw:1,0', '/tmp/audios/mensagem.wav'])     # LINUX
 
 def gravar_audio_microfone(duracao, arquivo_saida):
-    call(['arecord', '-f', 'S32_LE', '-r', '44100', '-D', 'plughw:CARD=PCH,DEV=0', arquivo_saida, '-d', '5'])
+    call(['arecord', '-f', 'S32_LE', '-r', '44100', '-D', 'plughw:CARD=PCH,DEV=0', arquivo_saida, '-d', str(duracao)])
 
 class ActionDesativarMonitoramento(Action):
 
@@ -233,7 +233,6 @@ class ActionGravarAudio(Action):
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
        
         channel = tracker.get_latest_input_channel()
-        print(channel)
 
         if (channel != "telegram"):
             dispatcher.utter_message(text="Canal não suportado para essa funcionalidade.")
@@ -243,11 +242,11 @@ class ActionGravarAudio(Action):
 
         if (username == "161484917" or username == "1307765181" or username == "1001307765181"):
                  
-            duracaoStr = tracker.get_slot("duracao_gravacao")
+            duracaoStr = tracker.get_slot("duracao")
             duracao = int(duracaoStr)
 
             if (duracao <= 60):
-                gravar_audio_microfone(duracao, '/tmp/audios/audio_mic.mp3')
+                gravar_audio_microfone(duracao=duracao, arquivo_saida='/tmp/audios/audio_mic.mp3')
                 
                 dispatcher.utter_message(text='Áudio gravado com sucesso.')
             else:
