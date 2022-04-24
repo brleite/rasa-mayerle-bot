@@ -9,6 +9,7 @@
 
 import datetime as dt
 from typing import Any, Text, Dict, List
+from os.path import exists
 
 from rasa_sdk import Action, Tracker, FormValidationAction
 from rasa_sdk.executor import CollectingDispatcher
@@ -23,20 +24,29 @@ from pydub import AudioSegment
 
 import telegrambot as bot
 
+ARQUIVO_AUDIO_GRAVADO_MICROFONE = '/tmp/audios/audio_mic.mp3'
+ARQUIVO_AUDIO_GRAVADO_OLIVIA_MP3 = '/tmp/audios/mensagem.mp3'
+ARQUIVO_AUDIO_GRAVADO_OLIVIA = '/tmp/audios/mensagem.wav'
+
+DEBUG_MODE = False 
+
 def clean_value(value):
     return "".join([c for c in value if c.isalpha()])
 
+def tocar_audio(arquivo):
+    call(['aplay', '-D', 'plughw:1,0', arquivo])
+
 def criar_audio(mensagem):
-    saida = '/tmp/audios/mensagem.mp3'
-
     tts = gTTS(mensagem, lang='pt-br')
-    tts.save(saida)
+    tts.save(ARQUIVO_AUDIO_GRAVADO_MP3)
 
-    sound = AudioSegment.from_mp3("/tmp/audios/mensagem.mp3")
-    sound.export("/tmp/audios/mensagem.wav", format="wav")
+    sound = AudioSegment.from_mp3(ARQUIVO_AUDIO_GRAVADO_OLIVIA_MP3)
+    sound.export(ARQUIVO_AUDIO_GRAVADO_OLIVIA, format="wav")
 
     # print('OLIVIA: ', mensagem)
-    call(['aplay', '-D', 'plughw:1,0', '/tmp/audios/mensagem.wav'])     # LINUX
+    # call(['aplay', '-D', 'plughw:1,0', '/tmp/audios/mensagem.wav'])     # LINUX
+    tocar_audio(arquivo=ARQUIVO_AUDIO_GRAVADO_OLIVIA)
+
 
 def gravar_audio_microfone(duracao, arquivo_saida):
     call(['arecord', '-f', 'S32_LE', '-r', '44100', '-D', 'plughw:CARD=PCH,DEV=0', arquivo_saida, '-d', str(duracao)])
@@ -109,7 +119,7 @@ class ActionFalarOlivia(Action):
 
         username = tracker.sender_id
 
-        if (username == "161484917" or username == "1307765181" or username == "1001307765181"):
+        if (DEBUG_MODE == True or username == "161484917" or username == "1307765181" or username == "1001307765181"):
                  
           #  message = tracker.latest_message.get('text')
           message = tracker.get_slot("frase_assistente")
@@ -214,8 +224,6 @@ class ValidateGravarAudioMicrofoneForm(FormValidationAction):
         try:
             duracao = int(slot_value)
             max_duracao = 20
-            print(duracao)
-            print(max_duracao)
             
             if (duracao > max_duracao):
                 dispatcher.utter_message(text="Você informou um valor superior a " + max_duracao + ".")
@@ -237,22 +245,24 @@ class ActionGravarAudio(Action):
        
         channel = tracker.get_latest_input_channel()
 
-        if (channel != "telegram"):
-            dispatcher.utter_message(text="Canal não suportado para essa funcionalidade.")
-            return
- 
         username = tracker.sender_id
 
-        if (username == "161484917" or username == "1307765181" or username == "1001307765181"):
+        if (DEBUG_MODE == True or username == "161484917" or username == "1307765181" or username == "1001307765181"):
                  
             duracaoStr = tracker.get_slot("duracao")
             duracao = int(duracaoStr)
             max_duracao = 20
 
             if (duracao <= max_duracao):
-                gravar_audio_microfone(duracao=duracao, arquivo_saida='/tmp/audios/audio_mic.mp3')
+                gravar_audio_microfone(duracao=duracao, arquivo_saida=ARQUIVO_AUDIO_GRAVADO_MICROFONE)
                 
                 dispatcher.utter_message(text='Áudio gravado com sucesso.')
+        
+                #if (channel == "telegram"):
+                    # TODO: Enviar áudio pelo telegram
+                    #dispatcher.utter_message(text="Canal não suportado para essa funcionalidade.")
+                    #return
+ 
             else:
                 dispatcher.utter_message(text='Não foi possível realizar a gravação. A duração especificada é muito longa.')
                 
@@ -270,3 +280,32 @@ class ActionResetSlotsGravarAudioMicrofone(Action):
         # return [AllSlotsReset()]
         return [SlotSet("duracao", None)]
 
+class ActionTocarAudio(Action):
+
+    def name(self):
+        return "action_tocar_audio_gravado_microfone"
+
+    def run(self, dispatcher: CollectingDispatcher,
+            tracker: Tracker,
+            domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+
+        channel = tracker.get_latest_input_channel()
+
+        username = tracker.sender_id
+        #print(username)
+
+        if (DEBUG_MODE == True or username == "161484917" or username == "1307765181" or username == "1001307765181"):
+
+            if (exists(ARQUIVO_AUDIO_GRAVADO_MICROFONE)):
+                dispatcher.utter_message(text='Ok. O áudio está sendo reproduzido.')
+                
+                tocar_audio(arquivo=ARQUIVO_AUDIO_GRAVADO_MICROFONE)
+
+                dispatcher.utter_message(text='Áudio reproduzido com sucesso.')
+            else:
+                dispatcher.utter_message(text='Não foi encontrado nenhum arquivo gravado pelo microfone.')
+
+        else:
+            retorno = "Desculpe-me! Você não está autorizado(a) a essa funcionalidade."
+
+            dispatcher.utter_message(text=retorno)

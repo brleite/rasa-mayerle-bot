@@ -166,3 +166,10 @@ stories:
   #- action: utter_slots_values
   - action: action_gravar_audio_microfone
   - action: action_reset_slots_gravar_audio_microfone
+
+- story: Tocar audio gravado pelo microfone
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - intent: tocar_audio_gravado_microfone
+  - action: action_tocar_audio_gravado_microfone

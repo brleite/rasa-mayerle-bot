@@ -217,3 +217,13 @@ nlu:
     - Gravar mic
     - Capturar som ambiente
     - Capturar audio
+
+- intent: tocar_audio_gravado_microfone
+  examples: |
+    - Tocar áudio gravado pelo microfone
+    - Tocar audio do microfone
+    - Reproduzir audio gravado
+    - Play audio gravado
+    - Reproduzir som gravado
+    - Tocar som gravado
+    - Dar o play no som gravado pelo microfone

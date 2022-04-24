@@ -22,6 +22,7 @@ intents:
   - conversar_time
   - repetir_time
   - gravar_audio_microfone
+  - tocar_audio_gravado_microfone
 
 entities:
   - frase_assistente
@@ -145,6 +146,7 @@ actions:
   - action_gravar_audio_microfone
   - validate_gravar_audio_microfone_form
   - action_reset_slots_gravar_audio_microfone
+  - action_tocar_audio_gravado_microfone
 
 session_config:
   session_expiration_time: 60
