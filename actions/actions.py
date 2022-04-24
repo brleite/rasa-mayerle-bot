@@ -38,7 +38,7 @@ def tocar_audio(arquivo):
 
 def criar_audio(mensagem):
     tts = gTTS(mensagem, lang='pt-br')
-    tts.save(ARQUIVO_AUDIO_GRAVADO_MP3)
+    tts.save(ARQUIVO_AUDIO_GRAVADO_OLIVIA_MP3)
 
     sound = AudioSegment.from_mp3(ARQUIVO_AUDIO_GRAVADO_OLIVIA_MP3)
     sound.export(ARQUIVO_AUDIO_GRAVADO_OLIVIA, format="wav")
